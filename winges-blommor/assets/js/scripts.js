@@ -1,9 +1,7 @@
 // Scripts// 
-let openHoursKiruna = [];
-let openHoursLulea = [];
-let closedDaysKiruna = [];
-let closedDaysLulea = [];
-let testOverride = false;
+let openHoursUppsala = [];
+let closedDaysUppsala = [];
+let testOverride = true;
 let isReadyOpen = false;
 let isReadyClosed = false;
 let timeoutCount = 0;
@@ -29,51 +27,35 @@ function findPageName(date, isRightTimezone) {
     url = url.split('/');
     const page = url[url.length - 2];
     if(isRightTimezone == true){
-        if (page == 'kiruna') {
-            //let openHoursKiruna = requestJsonKiruna();
-            document.getElementById('liveOpeningHours').innerHTML = getTimeMsg(openHoursKiruna, date);
-            viewSortedClosedDates(closedDaysKiruna);
+        if (page == 'winges-blommor') {
+            //let openHoursUppsala = requestJsonUppsala();
+            document.getElementById('liveOpeningHours').innerHTML = getTimeMsg(openHoursUppsala, date);
+            viewSortedClosedDates(closedDaysUppsala);
             
-        } else if (page == 'lulea') {
-            document.getElementById('liveOpeningHours').innerHTML = getTimeMsg(openHoursLulea, date);
-            viewSortedClosedDates(closedDaysLulea);
         }
     }
     else{
-        if (page == 'kiruna') {
-            viewSortedClosedDates(closedDaysKiruna);
-            
-        } else if (page == 'lulea') {
-            viewSortedClosedDates(closedDaysLulea);
-        }
+        viewSortedClosedDates(closedDaysUppsala);
     }
     
 }
 
 function viewSortedClosedDates(dataArray){
     document.getElementById("hideIfJavascript").style.display = "none";
-    for(let i = 0; i < dataArray.length; i++){
-        document.getElementById("dynamicClosedDays").innerHTML += '<div class="d-flex"><div>'+ dataArray[i][0] +'</div><div class="ms-auto" id="nyarsdagenKiruna">' + dataArray[i][1] + '/' + dataArray[i][2] + '</div></div>';
+    for(let i = 0; i < dataArray.length && i < 7; i++){
+        document.getElementById("dynamicClosedDays").innerHTML += '<div class="d-flex"><div>'+ dataArray[i][0] +'</div><div class="ms-auto">' + dataArray[i][1] + '/' + dataArray[i][2] + '</div></div>';
     }
 
 }
 
 function setTimesStatic(location, openHours){
-     if(location == 'kiruna'){
-         document.getElementById('mandagTidKiruna').innerHTML = openHours[1][0] + "-" + openHours[1][1];
-         document.getElementById('tisdagTidKiruna').innerHTML = openHours[2][0] + "-" + openHours[2][1];
-         document.getElementById('onsdagTidKiruna').innerHTML = openHours[3][0] + "-" + openHours[3][1];
-         document.getElementById('torsdagTidKiruna').innerHTML = openHours[4][0] + "-" + openHours[4][1];
-         document.getElementById('fredagTidKiruna').innerHTML = openHours[5][0] + "-" + openHours[5][1];
-         document.getElementById('lordagTidKiruna').innerHTML = openHours[6][0] + "-" + openHours[6][1];
-    }
-    else if(location == 'lulea'){
-        document.getElementById('mandagTidLulea').innerHTML = openHours[1][0] + "-" + openHours[1][1];
-        document.getElementById('tisdagTidLulea').innerHTML = openHours[2][0] + "-" + openHours[2][1];
-        document.getElementById('onsdagTidLulea').innerHTML = openHours[3][0] + "-" + openHours[3][1];
-        document.getElementById('torsdagTidLulea').innerHTML = openHours[4][0] + "-" + openHours[4][1];
-        document.getElementById('fredagTidLulea').innerHTML = openHours[5][0] + "-" + openHours[5][1];
-        document.getElementById('lordagTidLulea').innerHTML = openHours[6][0] + "-" + openHours[6][1];
+     if(location == 'uppsala'){
+         document.getElementById('mandagTidUppsala').innerHTML = openHours[1][0] + "-" + openHours[1][1];
+         document.getElementById('tisdagTidUppsala').innerHTML = openHours[2][0] + "-" + openHours[2][1];
+         document.getElementById('onsdagTidUppsala').innerHTML = openHours[3][0] + "-" + openHours[3][1];
+         document.getElementById('torsdagTidUppsala').innerHTML = openHours[4][0] + "-" + openHours[4][1];
+         document.getElementById('fredagTidUppsala').innerHTML = openHours[5][0] + "-" + openHours[5][1];
+         document.getElementById('lordagTidUppsala').innerHTML = openHours[6][0] + "-" + openHours[6][1];
     }
 }
 
@@ -160,13 +142,13 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 })
 
-function requestJsonKiruna(date) {
+function requestJsonUppsala(date) {
     try {
             $.ajax({
                 type: 'GET',
                 url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/B11:C17?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
                 success: function (response) {
-                    FormatKirunaResponseOpening(response);
+                    FormatUppsalaResponseOpening(response);
                     isReadyOpen = true;
                 }
             });
@@ -175,7 +157,7 @@ function requestJsonKiruna(date) {
                 url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/G11:I24?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
                 success: function (response) {
                     let formatedData = FormatResponseClosedDays(response);
-                    closedDaysKiruna = SortClosedDays(formatedData, date);
+                    closedDaysUppsala = SortClosedDays(formatedData, date);
 
                     isReadyClosed = true;
                 } 
@@ -188,9 +170,9 @@ function requestJsonKiruna(date) {
 }
 
 
-function FormatKirunaResponseOpening(data){
+function FormatUppsalaResponseOpening(data){
     try {
-        openHoursKiruna = [
+        openHoursUppsala = [
             [parseInt(data.values[6][0]), parseInt(data.values[6][1])],
             [parseInt(data.values[0][0]), parseInt(data.values[0][1])],
             [parseInt(data.values[1][0]), parseInt(data.values[1][1])],
@@ -200,49 +182,7 @@ function FormatKirunaResponseOpening(data){
             [parseInt(data.values[5][0]), parseInt(data.values[5][1])],
             [parseInt(data.values[6][0]), parseInt(data.values[6][1])]
         ]
-        setTimesStatic('kiruna', openHoursKiruna);
-    } catch (e) {
-        console.error("Error formatting OpeningHours. Make sure no letters or signs are entered.");
-    }
-}
-
-function requestJsonLulea(date) {
-   try {
-        $.ajax({
-            type: 'GET',
-            url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/B28:C34?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
-            success: function (response) {
-                FormatLuleaResponseOpening(response);
-                isReadyOpen = true;
-            }
-        });  
-        $.ajax({
-            type: 'GET',
-            url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/G28:I41?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
-            success: function (response) {
-                let formatedData = FormatResponseClosedDays(response);
-                closedDaysLulea = SortClosedDays(formatedData, date);
-                isReadyClosed = true;
-            }
-        });  
-    } catch (e) {
-        console.error("Error: " + e);
-    }
-}
-
-function FormatLuleaResponseOpening(data){
-    try {
-        openHoursLulea = [
-            [parseInt(data.values[6][0]), parseInt(data.values[6][1])],
-            [parseInt(data.values[0][0]), parseInt(data.values[0][1])],
-            [parseInt(data.values[1][0]), parseInt(data.values[1][1])],
-            [parseInt(data.values[2][0]), parseInt(data.values[2][1])],
-            [parseInt(data.values[3][0]), parseInt(data.values[3][1])],
-            [parseInt(data.values[4][0]), parseInt(data.values[4][1])],
-            [parseInt(data.values[5][0]), parseInt(data.values[5][1])],
-            [parseInt(data.values[6][0]), parseInt(data.values[6][1])]
-        ]
-        setTimesStatic('lulea', openHoursLulea);
+        setTimesStatic('uppsala', openHoursUppsala);
     } catch (e) {
         console.error("Error formatting OpeningHours. Make sure no letters or signs are entered.");
     }
@@ -265,11 +205,11 @@ function FormatResponseClosedDays(data){
 
 function SortClosedDays(dataArr, today) {
 
-    var currentMonth = parseInt(today.getMonth() + 1); //get month returns a value between 0 and 11. setting +1 gets the real month number.
-      var currentDay = parseInt(today.getDate());
+    let currentMonth = parseInt(today.getMonth() + 1); //get month returns a value between 0 and 11. setting +1 gets the real month number.
+    let currentDay = parseInt(today.getDate());
 
-      let futureDates = [];
-      let pastDates = [];
+    let futureDates = [];
+    let pastDates = [];
       for(let i = 0; i < dataArr.length; i++) {
             if(dataArr[i][1] <= currentMonth){
                 if(dataArr[i][2] >= currentDay && dataArr[i][1] == currentMonth){
@@ -284,10 +224,55 @@ function SortClosedDays(dataArr, today) {
             }
       }
     let dateArr = [];
+
+    pastDates.sort((a, b) => {
+        if (a[1] > b[1] && a[2] > b[2]){
+            return 1;
+        }
+        if (a[1] < b[1] && a[2] < b[2]){
+            return -1;
+        }
+        if (a[1] > b[1]){
+            return 1;
+        }
+        if (a[1] < b[1]){
+            return -1;
+        }
+        if (a[2] > b[2] && a[1] == b[1]){
+            return 1;
+        }
+        if (a[2] < b[2] && a[1] == b[1]){
+            return -1;
+        }
+        return 0;
+    });
+    futureDates.sort((a, b) => {
+        if (a[1] > b[1] && a[2] > b[2]){
+            return 1;
+        }
+        if (a[1] < b[1] && a[2] < b[2]){
+            return -1;
+        }
+        if (a[1] > b[1]){
+            return 1;
+        }
+        if (a[1] < b[1]){
+            return -1;
+        }
+        if (a[2] > b[2] && a[1] == b[1]){
+            return 1;
+        }
+        if (a[2] < b[2] && a[1] == b[1]){
+            return -1;
+        }
+        return 0;
+    });
     dateArr.push.apply(dateArr, futureDates);
     dateArr.push.apply(dateArr, pastDates);
     return dateArr;
 }
+
+
 
 function checkIfRequestIsDone() {
     if (timeoutCount > 100){
@@ -303,7 +288,7 @@ function checkIfRequestIsDone() {
         // Checks if you are on the right subpage
         if (testOverride == true){
             findPageName(new Date(), true);
-            console.log(closedDaysKiruna);
+            console.log(closedDaysUppsala);
         } else if (timeZone == 'Europe/Stockholm') {
             findPageName(new Date(), true);
         }
@@ -316,10 +301,7 @@ function checkIfRequestIsDone() {
 let url = window.location.href;
 url = url.split('/');
 const page = url[url.length - 2];
-if (page == 'kiruna') {
-    requestJsonKiruna(new Date());
-} else if (page == 'lulea') {
-    requestJsonLulea(new Date());
+if (page == 'uppsala') {
+    requestJsonUppsala(new Date());
+    checkIfRequestIsDone();
 }
-
-checkIfRequestIsDone();
