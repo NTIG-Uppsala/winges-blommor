@@ -1,0 +1,334 @@
+body{
+    background-color: #212529;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin:  0;
+}
+
+#siteMap{
+    padding-left: 16px;
+    border-bottom: 1px solid #797777 !important;
+}
+
+#staff{
+    background-color: rgb(182, 175, 186) !important;
+}
+
+#products{
+    background-color: #b6afba !important;
+}
+
+#mainPage{
+    background-image: url("../img/header-bg.jpg");
+}
+
+#kiruna{
+    background-image: url("../img/header-bg-kiruna.jpg");
+}
+
+#lulea{
+    background-image: url("../img/header-bg-lulea.jpg");
+}
+
+.infoList{
+
+    list-style: none;
+
+    padding-left: 0px;
+
+    display: inline-block;
+
+}
+
+.link-image {
+    transition: all 0.4s ease 0s;
+    overflow: hidden;
+}
+.link-image-container img {
+    transition: all 0.4s ease 0s;
+    overflow: hidden;
+}
+
+.link-image-container {
+    transition: all 0.4s ease 0s;
+    overflow: hidden;
+}
+
+.link-image:hover {
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.4s ease 0s;
+}
+.link-image-container:hover img {
+    transform: scale(1.2);
+    object-fit: contain;
+    transition: all 0.4s ease 0s;
+}
+
+
+.noJs{
+    background-color: black !important;
+}
+
+
+.infoList li{
+
+    text-align: left;
+
+}
+
+
+.infoListContainer{
+
+    align-items: center;
+
+}
+
+.storesContainer{
+    display: inline-block;
+}
+
+.icon-circle{
+
+    display: inline-block;
+
+    height: 175px;
+
+    width: 175px;
+
+    background-color: #ffc800;
+
+    border-radius: 50%;
+
+    margin-bottom: 1rem;
+
+}
+
+.gap{
+    margin-bottom: 3rem !important;
+}
+
+.icon-container{
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+
+.icon{
+
+    display: inline-block;
+
+    top: 50%;
+
+}
+
+
+
+.weekDayHour{
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+
+.weekEndHour{
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+
+.hoursContainer{
+
+    margin: 0 auto;
+
+    max-width: 295px;
+
+}
+
+
+
+.arrowDownCon{
+
+  display: inline-flex;/* defines flexbox */
+
+  flex-direction: column;/* top to bottom */
+
+  justify-content: space-between;/* first item at start, last at end */
+
+}
+
+
+
+.arrowDown{
+
+  margin-top: 100%;
+
+}
+
+#liveOpeningHours{
+
+padding-top: 10px;
+font-size: 24px;
+max-width: 295px;
+margin: 0 auto;
+padding-bottom: 16px;
+color: #FFC800;
+}
+
+@media screen and (max-width: 1000px){
+    #mainNav{
+        visibility: hidden;
+    }
+
+
+
+}
+
+.staffImg-border{
+
+    display: inline-block;
+
+    height: 200px;
+
+    width: 200px;
+
+    margin-bottom: 1rem;
+
+}
+
+
+
+.staffImg-container{
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+
+.staffImg{
+
+    display: inline-block;
+
+    top: 50%;
+    
+    border-radius: 25%;
+
+}
+
+a:link{
+    text-decoration: none !important;
+}
+
+
+@media screen and (min-width: 990px){
+    
+    #hoursOpenMenu{
+        display: none;
+    }
+
+    #findUsMenu{
+        display: none;
+    }
+
+    #aboutUsMenu{
+        display: none;
+    }
+
+    #staffMenu{
+        display: none;
+    }
+
+    .itemMenu{
+        margin-left: -1rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .longWord {
+        margin-left: -10px;
+    }
+}
+
+#heading{
+    margin-bottom: 0px;
+}
+
+#subHeading{
+    margin-top: 24px;
+}
+
+.rowTwo{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -.5);
+    margin-left: calc(var(--bs-gutter-x) * -.5);
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+}
+
+.rowTwo > div{
+    flex: 50%;
+    flex-shrink: 0;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.sitemapCenter{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.workTitle{
+    font-size: 25px !important;
+}
+
+@media screen and (max-width: 1400px) {
+    .sitemapCenter{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+.serviceContainer{
+    display: flex;
+    justify-content: center;
+}
+.maxService{
+    max-width: 400px !important;
+}
