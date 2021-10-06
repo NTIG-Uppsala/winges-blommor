@@ -49,7 +49,7 @@ function viewSortedClosedDates(dataArray){
 }
 
 function setTimesStatic(location, openHours){
-     if(location == 'uppsala'){
+     if(location == 'winges-blommor'){
          document.getElementById('mandagTidUppsala').innerHTML = openHours[1][0] + "-" + openHours[1][1];
          document.getElementById('tisdagTidUppsala').innerHTML = openHours[2][0] + "-" + openHours[2][1];
          document.getElementById('onsdagTidUppsala').innerHTML = openHours[3][0] + "-" + openHours[3][1];
@@ -182,7 +182,7 @@ function FormatUppsalaResponseOpening(data){
             [parseInt(data.values[5][0]), parseInt(data.values[5][1])],
             [parseInt(data.values[6][0]), parseInt(data.values[6][1])]
         ]
-        setTimesStatic('uppsala', openHoursUppsala);
+        setTimesStatic('winges-blommor', openHoursUppsala);
     } catch (e) {
         console.error("Error formatting OpeningHours. Make sure no letters or signs are entered.");
     }
@@ -301,7 +301,7 @@ function checkIfRequestIsDone() {
 let url = window.location.href;
 url = url.split('/');
 const page = url[url.length - 2];
-if (page == 'uppsala') {
+if (page == 'winges-blommor') {
     requestJsonUppsala(new Date());
     checkIfRequestIsDone();
 }
