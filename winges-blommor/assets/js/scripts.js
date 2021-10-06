@@ -164,7 +164,7 @@ function requestJsonKiruna(date) {
     try {
             $.ajax({
                 type: 'GET',
-                url: `https://sheets.googleapis.com/v4/spreadsheets/1UPl5omRAHA6uMnlC--p_tKvYLEYgyrpn7ZJjtdvupoI/values/B11:C17?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
+                url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/B11:C17?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
                 success: function (response) {
                     FormatKirunaResponseOpening(response);
                     isReadyOpen = true;
@@ -172,7 +172,7 @@ function requestJsonKiruna(date) {
             });
             $.ajax({
                 type: 'GET',
-                url: `https://sheets.googleapis.com/v4/spreadsheets/1UPl5omRAHA6uMnlC--p_tKvYLEYgyrpn7ZJjtdvupoI/values/G11:I24?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
+                url: `https://sheets.googleapis.com/v4/spreadsheets/1nNBlrudixOenOvzKaVkOBcEqfonBJa7SsygarqB9nKU/values/G11:I24?key=AIzaSyAEcN2gPi9-UMllfIveKJydPZTrmKjJFKY`,
                 success: function (response) {
                     let formatedData = FormatResponseClosedDays(response);
                     closedDaysKiruna = SortClosedDays(formatedData, date);
