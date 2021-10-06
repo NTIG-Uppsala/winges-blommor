@@ -192,9 +192,7 @@ function FormatResponseClosedDays(data){
     let dataArr = [];
     try {
         let lengthOfDataValues = data.values.length;
-        console.log(lengthOfDataValues);
         for(let i = 0; i < lengthOfDataValues; i++){
-            console.log(i);
             dataArr.push([data.values[i][0], parseInt(data.values[i][1]), parseInt(data.values[i][2])]);
         }
     } catch (e) {
@@ -288,7 +286,6 @@ function checkIfRequestIsDone() {
         // Checks if you are on the right subpage
         if (testOverride == true){
             findPageName(new Date(), true);
-            console.log(closedDaysUppsala);
         } else if (timeZone == 'Europe/Stockholm') {
             findPageName(new Date(), true);
         }
